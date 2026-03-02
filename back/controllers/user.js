@@ -1,6 +1,7 @@
 import argon2 from "argon2";
 import jwt from "jsonwebtoken";
 import { registerUserM } from "../modules/user.js";
+import AppError from "../utils/appError.js";
 
 // creates and returns jwt token
 
@@ -33,6 +34,15 @@ export const registerUserC = async (req, res, next) => {
   try {
     const newUser = req.body;
 
+    if (
+      !newUser.fullName ||
+      !newUser.userName ||
+      !newUser.password ||
+      !newUser.emailAddress
+    ) {
+      throw new AppError("Not enough info", 400);
+    }
+
     const hash = await argon2.hash(newUser.password);
 
     newUser.password = hash;
@@ -51,6 +61,6 @@ export const registerUserC = async (req, res, next) => {
       data: createdUser,
     });
   } catch (error) {
-    next(err);
+    next(error);
   }
 };
