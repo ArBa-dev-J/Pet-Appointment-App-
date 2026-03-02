@@ -1,6 +1,6 @@
 import argon2 from "argon2";
 import jwt from "jsonwebtoken";
-import { registerUserM, getUserByEmailM } from "../modules/user.js";
+import { registerUserM, getUserByEmailM, getUserByIdM } from "../modules/user.js";
 import AppError from "../utils/appError.js";
 
 // creates and returns jwt token
@@ -79,7 +79,7 @@ export const loginC = async (req, res, next) => {
     if (!passwordCorrect)
       throw new AppError("Invalid user email or password", 401);
 
-    const token = signToken(user.id);
+    const token = signToken(user.userId);
     sendTokenCookie(token, res);
 
     user.password = undefined;
@@ -91,4 +91,40 @@ export const loginC = async (req, res, next) => {
   } catch (err) {
     next(err);
   }
+};
+
+//autorizacijos middleware, routes apsaugai nuo neregistruotų vartotojų
+export const protect = async (req, res, next) => {
+  try {
+    let token = req.cookies?.jwt;
+
+    if (!token) {
+      throw new AppError("You are not logged in! Please log in to get access");
+    }
+
+    const decodedUser = jwt.verify(token, process.env.JWT_SECRET);
+  
+    const currentUser = await getUserByIdM(decodedUser.id);
+
+    if (!currentUser) {
+      throw new AppError(
+        "The user belonging to this token does not longer exist",
+        401,
+      );
+    }
+
+    req.user = currentUser;
+
+    next();
+  } catch (err) {
+    next(err);
+  }
+};
+
+//logout user
+export const logout = (req, res) => {
+  return res.clearCookie("jwt").status(200).json({
+    status: "success",
+    message: "Your are now logged out",
+  });
 };

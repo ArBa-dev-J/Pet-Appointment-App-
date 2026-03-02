@@ -19,6 +19,14 @@ export const registerUserM = async (newUser) => {
   return uploadUser[0];
 };
 
+// get all users
+
+// get users by id
+export const getUserByIdM = async (id) => {
+  const users = await sql`select * from registered_user where "userId"=${id}`;
+  return users[0];
+};
+
 // get  by email
 
 export const getUserByEmailM = async (emailAddress) => {
