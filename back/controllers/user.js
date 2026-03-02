@@ -1,6 +1,6 @@
 import argon2 from "argon2";
 import jwt from "jsonwebtoken";
-import { registerUserM } from "../modules/user.js";
+import { registerUserM, getUserByEmailM } from "../modules/user.js";
 import AppError from "../utils/appError.js";
 
 // creates and returns jwt token
@@ -62,5 +62,33 @@ export const registerUserC = async (req, res, next) => {
     });
   } catch (error) {
     next(error);
+  }
+};
+
+
+// login and writes jwt token
+export const loginC = async (req, res, next) => {
+  try {
+    const { emailAddress, password } = req.body;
+
+    const user = await getUserByEmailM(emailAddress);
+    if (!user) throw new AppError("Invalid user email or password", 401);
+
+    const passwordCorrect = await argon2.verify(user.password, password);
+
+    if (!passwordCorrect)
+      throw new AppError("Invalid user email or password", 401);
+
+    const token = signToken(user.id);
+    sendTokenCookie(token, res);
+
+    user.password = undefined;
+
+    res.status(200).json({
+      status: "success",
+      data: user,
+    });
+  } catch (err) {
+    next(err);
   }
 };
