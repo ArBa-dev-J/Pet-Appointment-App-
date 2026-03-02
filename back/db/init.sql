@@ -19,13 +19,13 @@ CREATE TABLE
         CONSTRAINT fk_user FOREIGN KEY ("userId") REFERENCES registered_user ("userId") ON DELETE CASCADE
     );
 
-CREATE TABLE
-    "admin" (
-        "adminId" SERIAL PRIMARY KEY,
-        "fullName" VARCHAR(50) NOT NULL UNIQUE,
-        "userName" VARCHAR(100) NOT NULL UNIQUE,
-        "password" VARCHAR(500) NOT NULL UNIQUE,
-        "emailAddress" VARCHAR(30) NOT NULL UNIQUE
-    );
+-- CREATE TABLE
+--     "admin" (
+--         "adminId" SERIAL PRIMARY KEY,
+--         "fullName" VARCHAR(50) NOT NULL UNIQUE,
+--         "userName" VARCHAR(100) NOT NULL UNIQUE,
+--         "password" VARCHAR(500) NOT NULL UNIQUE,
+--         "emailAddress" VARCHAR(30) NOT NULL UNIQUE
+--     );
 
 END;

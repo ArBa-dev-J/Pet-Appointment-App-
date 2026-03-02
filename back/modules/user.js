@@ -21,12 +21,12 @@ export const registerUserM = async (newUser) => {
 
 // get all users
 
-export const getAllUsersM = async () => {
-  const users = await sql`
-  SELECT * FROM registered_user
-  `;
-  return users[0];
-};
+// export const getAllUsersM = async () => {
+//   const users = await sql`
+//   SELECT * FROM registered_user
+//   `;
+//   return users[0];
+// };
 
 // get users by id
 export const getUserByIdM = async (id) => {

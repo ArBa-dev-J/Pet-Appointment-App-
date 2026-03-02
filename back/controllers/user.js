@@ -4,7 +4,6 @@ import {
   registerUserM,
   getUserByEmailM,
   getUserByIdM,
-  getAllUsersM,
 } from "../modules/user.js";
 import AppError from "../utils/appError.js";
 
@@ -72,24 +71,24 @@ export const registerUserC = async (req, res, next) => {
 
 //get all users
 
-export const getAllUsersC = async (req, res, next) => {
-  try {
-    const userList = await getAllUsersM();
+// export const getAllUsersC = async (req, res, next) => {
+//   try {
+//     const userList = await getAllUsersM();
 
-    if (userList.length === 0) {
-      throw new AppError("No tours found", 404);
-    }
+//     if (userList.length === 0) {
+//       throw new AppError("No tours found", 404);
+//     }
 
-    userList.password = undefined;
+//     userList.password = undefined;
 
-    res.status(200).json({
-      status: "success",
-      data: userList,
-    });
-  } catch (error) {
-    next(error);
-  }
-};
+//     res.status(200).json({
+//       status: "success",
+//       data: userList,
+//     });
+//   } catch (error) {
+//     next(error);
+//   }
+// };
 
 // login and writes jwt token
 export const loginC = async (req, res, next) => {
