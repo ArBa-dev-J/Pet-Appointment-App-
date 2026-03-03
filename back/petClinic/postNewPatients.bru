@@ -1,0 +1,19 @@
+meta {
+  name: postNewPatients
+  type: http
+  seq: 5
+}
+
+post {
+  url: http://localhost:3000/api/v1/user/:id/patients
+  body: none
+  auth: inherit
+}
+
+params:path {
+  id: 
+}
+
+settings {
+  encodeUrl: true
+}
