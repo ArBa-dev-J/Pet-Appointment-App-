@@ -4,8 +4,8 @@ import {
   loginC,
   logout,
   protect,
-  getAuthenticatedUser,
   allowAccessTo,
+  restrictToOwnUser,
 } from "../controllers/user.js";
 import { postNewPatientC } from "../controllers/patients.js";
 import validate from "../validator/validate.js";
@@ -18,6 +18,13 @@ const userRoutes = express.Router();
 userRoutes.route("/logout").get(protect, logout);
 userRoutes.route("/register").post(validateNewUser, validate, registerUserC);
 userRoutes.route("/login").get(validateNewLogin, validate, loginC);
-userRoutes.route("/:id/patients").post(protect, allowAccessTo("user"), getAuthenticatedUser, postNewPatientC);
+userRoutes
+  .route("/:id/patients")
+  .post(
+    protect,
+    allowAccessTo("user"),
+    restrictToOwnUser,
+    postNewPatientC,
+  );
 
 export default userRoutes;

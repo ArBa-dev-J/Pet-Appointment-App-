@@ -145,6 +145,14 @@ export const protect = async (req, res, next) => {
   }
 };
 
+export const restrictToOwnUser = (req, res, next) => {
+
+  if (req.user.userId !== Number(req.params.id)) {
+    throw new AppError("you do not have the permission", 403);
+  }
+  next();
+};
+
 //patikrins kokią rolę turi prisijungęs vartotojas ir pagal rolę suteiks teises į informaciją
 export const allowAccessTo = (...roles) => {
   return (req, res, next) => {
@@ -162,14 +170,10 @@ export const allowAccessTo = (...roles) => {
       }
       next();
     } catch (err) {
-      res.status(500).json({
-        status: "fail",
-        message: err.message,
-      });
+      next(err);
     }
   };
 };
-
 
 //logout user
 export const logout = (req, res) => {
@@ -179,15 +183,3 @@ export const logout = (req, res) => {
   });
 };
 
-
-export const getAuthenticatedUser = (req, res, next) => {
-  try {
-    req.user.password = undefined;
-    next();
-  } catch (err) {
-    res.status(500).json({
-      status: "fail",
-      message: err.message,
-    });
-  }
-};
