@@ -30,8 +30,9 @@ export const postNewPatientC = async (req, res, next) => {
 export const getAllpatientsByIdC = async (req, res, next) => {
   try {
     const { userId } = req.user;
+    const { name } = req.query;
     
-    const patients = await  getAllPatientsByIdM(userId);
+    const patients = await getAllPatientsByIdM(userId, name);
 
     if (patients.length == 0) {
       throw new AppError("No patients found", 404);

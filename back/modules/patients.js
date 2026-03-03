@@ -20,9 +20,10 @@ export const postNewPatientM = async (newData, { id }) => {
 
 // get all patients by user id
 
-export const getAllPatientsByIdM = async (userId) => {
+export const getAllPatientsByIdM = async (userId, name) => {
   return await sql`
 SELECT * FROM patients
 WHERE "userId" = ${Number(userId)}
+${name ? sql`AND name ILIKE ${`%` + name + `%`}` : sql``}
 `;
 };
