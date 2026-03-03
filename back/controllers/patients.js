@@ -2,7 +2,7 @@ import { postNewPatientM } from "../modules/patients.js";
 import AppError from "../utils/appError.js";
 // post new patient
 
-export const postNewPatientC = async (res, req, next) => {
+export const postNewPatientC = async (req, res, next) => {
   try {
     const newData = req.body;
     const { id } = req.params;
@@ -11,7 +11,7 @@ export const postNewPatientC = async (res, req, next) => {
       throw new AppError("Error, not enough info", 400);
     }
 
-    if (!newData.option) {
+    if (!newData) {
       throw new AppError("Error, did not vote", 400);
     }
 

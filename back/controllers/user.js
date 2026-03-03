@@ -145,10 +145,49 @@ export const protect = async (req, res, next) => {
   }
 };
 
+//patikrins kokią rolę turi prisijungęs vartotojas ir pagal rolę suteiks teises į informaciją
+export const allowAccessTo = (...roles) => {
+  return (req, res, next) => {
+    try {
+      // console.log(req.user.roles);
+      // console.log(roles);
+      // console.log(req.user);
+      // console.log(!roles.includes(req.user.role));
+
+      if (!roles) {
+        res.status(403).json({
+          status: "Fail",
+          message: "You do not have the permission",
+        });
+      }
+      next();
+    } catch (err) {
+      res.status(500).json({
+        status: "fail",
+        message: err.message,
+      });
+    }
+  };
+};
+
+
 //logout user
 export const logout = (req, res) => {
   return res.clearCookie("jwt").status(200).json({
     status: "success",
     message: "Your are now logged out",
   });
+};
+
+
+export const getAuthenticatedUser = (req, res, next) => {
+  try {
+    req.user.password = undefined;
+    next();
+  } catch (err) {
+    res.status(500).json({
+      status: "fail",
+      message: err.message,
+    });
+  }
 };
