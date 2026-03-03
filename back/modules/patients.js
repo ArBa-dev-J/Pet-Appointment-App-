@@ -17,3 +17,12 @@ export const postNewPatientM = async (newData, { id }) => {
 
   return newPatient[0];
 };
+
+// get all patients by user id
+
+export const getAllPatientsByIdM = async (userId) => {
+  return await sql`
+SELECT * FROM patients
+WHERE "userId" = ${Number(userId)}
+`;
+};

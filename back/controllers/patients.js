@@ -1,4 +1,4 @@
-import { postNewPatientM } from "../modules/patients.js";
+import { postNewPatientM, getAllPatientsByIdM } from "../modules/patients.js";
 import AppError from "../utils/appError.js";
 // post new patient
 
@@ -19,6 +19,27 @@ export const postNewPatientC = async (req, res, next) => {
     res.status(201).json({
       status: "success",
       data: post,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+// get patients by user id
+
+export const getAllpatientsByIdC = async (req, res, next) => {
+  try {
+    const { userId } = req.user;
+    
+    const patients = await  getAllPatientsByIdM(userId);
+
+    if (patients.length == 0) {
+      throw new AppError("No patients found", 404);
+    }
+
+    res.status(200).json({
+      status: "success",
+      data: patients,
     });
   } catch (error) {
     next(error);
