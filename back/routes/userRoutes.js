@@ -9,7 +9,8 @@ import {
 } from "../controllers/user.js";
 import {
   postNewPatientC,
-  getAllpatientsByIdC,
+  getAllpatientsByUserIdC,
+  deleteUsersPatientC,
 } from "../controllers/patients.js";
 import validate from "../validator/validate.js";
 import validateNewUser from "../validator/validateNewUser.js";
@@ -23,6 +24,7 @@ userRoutes.route("/logout").get(protect, logout);
 userRoutes.route("/register").post(validateNewUser, validate, registerUserC);
 userRoutes.route("/login").get(validateNewLogin, validate, loginC);
 // user patients
+// add new patient
 userRoutes
   .route("/:id/patients/new")
   .post(
@@ -33,8 +35,21 @@ userRoutes
     validate,
     postNewPatientC,
   );
+// get user patients
 userRoutes
   .route("/:id/patients")
-  .get(protect, allowAccessTo("user"), restrictToOwnUser, getAllpatientsByIdC);
-
+  .get(
+    protect,
+    allowAccessTo("user"),
+    restrictToOwnUser,
+    getAllpatientsByUserIdC,
+  );
+// delete user patient
+userRoutes
+  .route("/:id/patients/delete")
+  .delete(
+    protect,
+    allowAccessTo("user"),
+    deleteUsersPatientC,
+  );
 export default userRoutes;

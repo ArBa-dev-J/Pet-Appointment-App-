@@ -1,4 +1,9 @@
-import { postNewPatientM, getAllPatientsByIdM } from "../modules/patients.js";
+import {
+  postNewPatientM,
+  getAllPatientsByUserIdM,
+  deleteUsersPatientM,
+  getPatientsByIdM
+} from "../modules/patients.js";
 import AppError from "../utils/appError.js";
 // post new patient
 
@@ -27,13 +32,13 @@ export const postNewPatientC = async (req, res, next) => {
 
 // get patients by user id
 
-export const getAllpatientsByIdC = async (req, res, next) => {
+export const getAllpatientsByUserIdC = async (req, res, next) => {
   try {
     const { userId } = req.user;
     const { sort } = req.query;
     const { name } = req.query;
 
-    const patients = await getAllPatientsByIdM(userId, name, sort);
+    const patients = await getAllPatientsByUserIdM(userId, name, sort);
 
     if (patients.length == 0) {
       throw new AppError("No patients found", 404);
@@ -42,6 +47,37 @@ export const getAllpatientsByIdC = async (req, res, next) => {
     res.status(200).json({
       status: "success",
       data: patients,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+//delete patient from user
+
+export const deleteUsersPatientC = async (req, res, next) => {
+  try {
+    const { userId } = req.user;
+    // console.log(userId);
+    const { id } = req.params;
+    // console.log(id);
+    const patients = await getAllPatientsByUserIdM(userId);
+
+    if (patients.length === 0) {
+      throw new AppError("No topics found", 404);
+    }
+
+    const patient = await getPatientsByIdM(id);
+
+    if (patient == 0){
+      throw new AppError("Patient not found", 404);
+    }
+    
+    await deleteUsersPatientM(id, userId);
+
+    res.status(200).json({
+      statu: "success",
+      message: "data was successfully deleted",
     });
   } catch (error) {
     next(error);

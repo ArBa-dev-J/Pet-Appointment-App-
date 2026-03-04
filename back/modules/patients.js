@@ -20,7 +20,7 @@ export const postNewPatientM = async (newData, { id }) => {
 
 // get all patients by user id
 
-export const getAllPatientsByIdM = async (userId, name, sort) => {
+export const getAllPatientsByUserIdM = async (userId, name, sort) => {
   const sortMap = {
     DESC: sql`name DESC`,
     ASC: sql`name ASC`,
@@ -38,4 +38,23 @@ ${sort ? sql`ORDER BY ${orderBy}` : sql``}
 `;
 
   return patientsList;
+};
+
+// fet patients by their ids
+
+export const getPatientsByIdM = async (id) => {
+  return sql`
+  SELECT * FROM patients
+  WHERE "pacientId" = ${id}
+  `;
+}
+
+// delete users patient
+
+export const deleteUsersPatientM = async (id, userId) => {
+  return sql`
+DELETE FROM patients 
+WHERE "pacientId" = ${id}
+AND "userId" = ${Number(userId)}
+`;
 };

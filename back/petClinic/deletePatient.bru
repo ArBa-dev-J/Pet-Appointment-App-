@@ -1,0 +1,19 @@
+meta {
+  name: deletePatient
+  type: http
+  seq: 7
+}
+
+delete {
+  url: http://localhost:3000/api/v1/users/:id/patients/delete
+  body: none
+  auth: inherit
+}
+
+params:path {
+  id: 
+}
+
+settings {
+  encodeUrl: true
+}

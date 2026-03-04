@@ -5,7 +5,7 @@ CREATE TABLE
         "userId" SERIAL PRIMARY KEY,
         "fullName" VARCHAR(100) NOT NULL UNIQUE,
         "userName" VARCHAR(100) NOT NULL UNIQUE,
-        "password" VARCHAR(500) NOT NULL UNIQUE,
+        "password" VARCHAR(500) NOT NULL,
         "emailAddress" VARCHAR(30) NOT NULL UNIQUE
     );
 

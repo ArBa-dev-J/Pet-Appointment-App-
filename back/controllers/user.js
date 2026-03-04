@@ -146,7 +146,6 @@ export const protect = async (req, res, next) => {
 };
 
 export const restrictToOwnUser = (req, res, next) => {
-
   if (req.user.userId !== Number(req.params.id)) {
     throw new AppError("you do not have the permission", 403);
   }
@@ -163,10 +162,7 @@ export const allowAccessTo = (...roles) => {
       // console.log(!roles.includes(req.user.role));
 
       if (!roles) {
-        res.status(403).json({
-          status: "Fail",
-          message: "You do not have the permission",
-        });
+        throw new AppError("you do not have the premission", 403);
       }
       next();
     } catch (err) {
@@ -182,4 +178,3 @@ export const logout = (req, res) => {
     message: "Your are now logged out",
   });
 };
-
