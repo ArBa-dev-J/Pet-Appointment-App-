@@ -1,6 +1,6 @@
 import { sql } from "../dbConnection.js";
 
-// post new patient
+// post new patient apointment
 
 export const postNewPatientM = async (newData, { id }) => {
   const data = {
@@ -19,7 +19,7 @@ export const postNewPatientM = async (newData, { id }) => {
   return newPatient[0];
 };
 
-// get all patients by user id
+// get all patient apointments by user id
 
 export const getAllPatientsByUserIdM = async (userId, name, sort) => {
   const sortMap = {
@@ -41,7 +41,7 @@ ${sort ? sql`ORDER BY ${orderBy}` : sql``}
   return patientsList;
 };
 
-// fet patients by their ids
+// get patient apointments by their ids
 
 export const getPatientsByIdM = async (id) => {
   return sql`
@@ -50,7 +50,7 @@ export const getPatientsByIdM = async (id) => {
   `;
 };
 
-// delete users patient
+// delete users patient apointment
 
 export const deleteUsersPatientM = async (id, userId) => {
   return sql`
@@ -58,4 +58,19 @@ DELETE FROM patients
 WHERE "pacientId" = ${id}
 AND "userId" = ${Number(userId)}
 `;
+};
+
+// update patient apointment info
+
+export const updatePatientApInfoM = async (id, data, userId) => {
+  const columns = Object.keys(data);
+
+  const patientList = await sql`
+UPDATE patients set${sql(data, columns)}
+WHERE "patientId" = ${id}
+AND "userId" = ${userId}
+returning *
+`;
+
+  return patientList[0];
 };

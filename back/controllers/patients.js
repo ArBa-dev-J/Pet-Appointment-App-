@@ -3,6 +3,7 @@ import {
   getAllPatientsByUserIdM,
   deleteUsersPatientM,
   getPatientsByIdM,
+  updatePatientApInfoM
 } from "../modules/patients.js";
 import AppError from "../utils/appError.js";
 // post new patient
@@ -89,3 +90,12 @@ export const deleteUsersPatientC = async (req, res, next) => {
     next(error);
   }
 };
+
+
+// update patient apointment info
+
+export const updatePatientApinfo = async (req, res, next) => {
+  const {id} = req.params;
+  const {userId} = req.user;
+ 
+}
