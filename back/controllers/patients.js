@@ -64,13 +64,13 @@ export const deleteUsersPatientC = async (req, res, next) => {
     const patients = await getAllPatientsByUserIdM(userId);
 
     if (patients.length === 0) {
-      throw new AppError("No topics found", 404);
+      throw new AppError("No patients found", 404);
     }
 
     const patient = await getPatientsByIdM(id);
 
     if (patient == 0){
-      throw new AppError("Patient not found", 404);
+      throw new AppError("The patient was not found", 404);
     }
     
     await deleteUsersPatientM(id, userId);
