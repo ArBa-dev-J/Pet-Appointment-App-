@@ -15,6 +15,7 @@ CREATE TABLE
         "name" VARCHAR(50) NOT NULL,
         "date" DATE NOT NULL,
         "description" TEXT NOT NULL,
+        "isConfirmed" BOOLEAN NOT NULL,
         "userId" INT NOT NULL,
         CONSTRAINT fk_user FOREIGN KEY ("userId") REFERENCES registered_user ("userId") ON DELETE CASCADE
     );

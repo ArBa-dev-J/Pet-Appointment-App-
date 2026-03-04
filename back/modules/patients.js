@@ -7,11 +7,12 @@ export const postNewPatientM = async (newData, { id }) => {
     name: newData.name,
     date: newData.date,
     description: newData.description,
+    isConfirmed: newData.isConfirmed,
     userId: id,
   };
   console.log(data);
   const newPatient = await sql`
-    INSERT INTO patients ${sql(data, "name", "date", "description", "userId")}
+    INSERT INTO patients ${sql(data, "name", "date", "description", "isConfirmed", "userId")}
     RETURNING *
   `;
 
@@ -47,7 +48,7 @@ export const getPatientsByIdM = async (id) => {
   SELECT * FROM patients
   WHERE "pacientId" = ${id}
   `;
-}
+};
 
 // delete users patient
 

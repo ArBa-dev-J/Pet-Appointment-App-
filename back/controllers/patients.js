@@ -2,7 +2,7 @@ import {
   postNewPatientM,
   getAllPatientsByUserIdM,
   deleteUsersPatientM,
-  getPatientsByIdM
+  getPatientsByIdM,
 } from "../modules/patients.js";
 import AppError from "../utils/appError.js";
 // post new patient
@@ -11,13 +11,19 @@ export const postNewPatientC = async (req, res, next) => {
   try {
     const newData = req.body;
     const { id } = req.params;
+    const boolToString = newData.isConfirmed.toString();
 
-    if (!newData.name || !newData.date || !newData.description) {
+    if (
+      !newData.name ||
+      !newData.date ||
+      !newData.description ||
+      !boolToString
+    ) {
       throw new AppError("Error, not enough info", 400);
     }
 
     if (!newData) {
-      throw new AppError("Error, did not vote", 400);
+      throw new AppError("Error", 400);
     }
 
     const post = await postNewPatientM(newData, { id });
@@ -69,10 +75,10 @@ export const deleteUsersPatientC = async (req, res, next) => {
 
     const patient = await getPatientsByIdM(id);
 
-    if (patient == 0){
+    if (patient == 0) {
       throw new AppError("The patient was not found", 404);
     }
-    
+
     await deleteUsersPatientM(id, userId);
 
     res.status(200).json({
