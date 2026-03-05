@@ -21,7 +21,7 @@ const validatePatient = [
     })
     .withMessage(Error.message),
 
-  body("isConfirmed").isBoolean().withMessage("Must be a boolean"),
+  body("isConfirmed").isBoolean().toBoolean().withMessage("Must be a boolean"),
 
   body("description")
     .isString()
