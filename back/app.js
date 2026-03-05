@@ -2,7 +2,7 @@ import express from "express";
 import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
 import userRoutes from "./routes/userRoutes.js";
-
+import adminRoutes from "./routes/adminRoutes.js";
 const app = express();
 
 
@@ -13,5 +13,5 @@ const jsonParser = bodyParser.json();
 app.use(cookieParser());
 
 app.use("/api/v1/user", jsonParser, userRoutes);
-
+app.use("/api/v1/admin", jsonParser, adminRoutes); 
 export default app;
