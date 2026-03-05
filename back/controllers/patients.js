@@ -21,8 +21,10 @@ export const postNewPatientC = async (req, res, next) => {
       !boolToString
     ) {
       throw new AppError("Error, not enough info", 400);
+    } else if (newData.isConfirmed == true || boolToString == "true") {
+      throw new AppError("Cannot post true when registering a patient for appointment", 400);
     }
-
+    console.log(newData.isConfirmed == true);
     if (!newData) {
       throw new AppError("Error", 400);
     }
@@ -103,6 +105,10 @@ export const updatePatientApinfoC = async (req, res, next) => {
 
     if (Object.keys(newPatientApData).length === 0) {
       throw new AppError("No fields provided to update", 400);
+    }
+
+    if (newPatientApData.isConfirmed) {
+      throw new AppError("Not auhorized to update", 403);
     }
 
     const patientUpdated = await updatePatientApInfoM(id, newPatientApData, userId);
