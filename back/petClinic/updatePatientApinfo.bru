@@ -1,0 +1,19 @@
+meta {
+  name: updatePatientApinfo
+  type: http
+  seq: 8
+}
+
+patch {
+  url: http://localhost:3000/api/v1/users/:id/patients/update
+  body: none
+  auth: inherit
+}
+
+params:path {
+  id: 
+}
+
+settings {
+  encodeUrl: true
+}

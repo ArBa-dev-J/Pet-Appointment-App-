@@ -13,7 +13,7 @@ CREATE TABLE
     patients (
         "pacientId" SERIAL PRIMARY KEY,
         "name" VARCHAR(50) NOT NULL,
-        "date" DATE NOT NULL,
+        "date" timestamp [ (p) ] with time zone NOT NULL,
         "description" TEXT NOT NULL,
         "isConfirmed" BOOLEAN NOT NULL,
         "userId" INT NOT NULL,

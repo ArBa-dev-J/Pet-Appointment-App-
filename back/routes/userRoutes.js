@@ -11,6 +11,7 @@ import {
   postNewPatientC,
   getAllpatientsByUserIdC,
   deleteUsersPatientC,
+  updatePatientApinfoC
 } from "../controllers/patients.js";
 import validate from "../validator/validate.js";
 import validateNewUser from "../validator/validateNewUser.js";
@@ -52,4 +53,13 @@ userRoutes
     allowAccessTo("user"),
     deleteUsersPatientC,
   );
+// update patient apointment info
+userRoutes
+  .route("/:id/patients/update")
+  .patch(
+    protect,
+    allowAccessTo("user"),
+    updatePatientApinfoC
+  )
+
 export default userRoutes;

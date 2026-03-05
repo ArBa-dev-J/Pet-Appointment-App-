@@ -94,8 +94,28 @@ export const deleteUsersPatientC = async (req, res, next) => {
 
 // update patient apointment info
 
-export const updatePatientApinfo = async (req, res, next) => {
-  const {id} = req.params;
-  const {userId} = req.user;
- 
+export const updatePatientApinfoC = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const { userId } = req.user;
+
+    const newPatientApData = req.body;
+
+    if (Object.keys(newPatientApData).length === 0) {
+      throw new AppError("No fields provided to update", 400);
+    }
+
+    const patientUpdated = await updatePatientApInfoM(id, newPatientApData, userId);
+
+    if (!patientUpdated) {
+      throw new AppError("Invalid patient apointment ID", 404);
+    }
+    res.status(201).json({
+      status: "success",
+      data: patientUpdated,
+    });
+  } catch (error) {
+    next(error);
+  }
+
 }

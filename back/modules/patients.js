@@ -62,12 +62,12 @@ AND "userId" = ${Number(userId)}
 
 // update patient apointment info
 
-export const updatePatientApInfoM = async (id, data, userId) => {
-  const columns = Object.keys(data);
+export const updatePatientApInfoM = async (id, newPatientApData, userId) => {
+  const columns = Object.keys(newPatientApData);
 
   const patientList = await sql`
-UPDATE patients set${sql(data, columns)}
-WHERE "patientId" = ${id}
+UPDATE patients SET ${sql(newPatientApData, columns)}
+WHERE "pacientId" = ${id}
 AND "userId" = ${userId}
 returning *
 `;

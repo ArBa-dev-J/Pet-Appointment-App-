@@ -13,8 +13,13 @@ const validatePatient = [
   body("date")
     .isString()
     .withMessage("Name must be a string")
-    .isDate()
-    .withMessage("must be a date"),
+    .custom((value) => {
+      if (!/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/.test(value)) {
+        throw new Error('Value must be YYYY-MM-DDTHH:mm:ss.SSSZ');
+      }
+      return true;
+    })
+    .withMessage(Error.message),
 
   body("isConfirmed").isBoolean().withMessage("Must be a boolean"),
 
