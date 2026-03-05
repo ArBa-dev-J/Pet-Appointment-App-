@@ -9,4 +9,18 @@ export const getAllPatientsApM = async () => {
     `;
 
     return allPatients;
-} 
+};
+
+// admin change isConfirmed to true
+
+export const updatePatientApIsConfirmedM = async (id, newPatientApData) => {
+  const columns = Object.keys(newPatientApData);
+
+  const patientList = await sql`
+UPDATE patients SET ${sql(newPatientApData, columns)}
+WHERE "pacientId" = ${id}
+returning *
+`;
+
+  return patientList[0];
+};

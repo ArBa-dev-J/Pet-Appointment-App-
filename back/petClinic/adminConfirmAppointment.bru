@@ -1,0 +1,15 @@
+meta {
+  name: adminConfirmAppointment
+  type: http
+  seq: 9
+}
+
+patch {
+  url: http://localhost:3000/api/v1/admin/patient/confirm
+  body: none
+  auth: inherit
+}
+
+settings {
+  encodeUrl: true
+}

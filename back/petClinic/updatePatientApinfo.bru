@@ -5,15 +5,18 @@ meta {
 }
 
 patch {
-  url: http://localhost:3000/api/v1/users/:id/patients/update
-  body: none
+  url: http://localhost:3000/api/v1/user/1/patients/update
+  body: json
   auth: inherit
 }
 
-params:path {
-  id: 
+body:json {
+  {
+    "isConfirmed":
+  }
 }
 
 settings {
   encodeUrl: true
+  timeout: 0
 }

@@ -5,15 +5,21 @@ meta {
 }
 
 post {
-  url: http://localhost:3000/api/v1/user/:id/patients
-  body: none
+  url: http://localhost:3000/api/v1/user/1/patients/new
+  body: json
   auth: inherit
 }
 
-params:path {
-  id: 
+body:json {
+  {
+    "name": "lopas",
+    "date": "2026-04-02T08:12:00.000Z",
+    "isConfirmed": false,
+    "description": "adasdada"
+  }
 }
 
 settings {
   encodeUrl: true
+  timeout: 0
 }
