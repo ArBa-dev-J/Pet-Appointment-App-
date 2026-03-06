@@ -1,9 +1,10 @@
 import { Link } from "react-router";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router";
 const API_URL = import.meta.env.VITE_API_URL;
 
 function SignUpForm() {
-
+  let navigate = useNavigate();
 
 
   const {
@@ -25,7 +26,9 @@ function SignUpForm() {
         requestOptions,
       );
       if (response.ok) {
+        alert("You have successfully signed up");
         reset();
+        navigate("/");
       } else {
         throw new Error("Data was not sent");
       }
