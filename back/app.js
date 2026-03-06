@@ -9,6 +9,13 @@ const app = express();
 // create application/json parser
 const jsonParser = bodyParser.json();
 
+app.use(
+  cors({
+    origin: `http://localhost:5173`,
+    credentials: true,
+  }),
+);
+
 //middleware for parsing cookies to req.cookies
 app.use(cookieParser());
 
