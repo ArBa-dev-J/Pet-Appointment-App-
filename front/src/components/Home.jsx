@@ -10,7 +10,7 @@ function Home() {
         <section className="flex flex-col justify-center items-center min-h-screen gap-10">
           <Link to="/SignUp"><button type="button">Sign Up</button></Link>
 
-          <button type="button">Log In</button>
+         <Link to="Login"><button type="button">Login</button></Link>
         </section>
       </main>
     </>

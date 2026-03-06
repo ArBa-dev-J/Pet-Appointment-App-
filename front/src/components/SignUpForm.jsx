@@ -18,7 +18,7 @@ function SignUpForm() {
             <input type="text"className="border block"  />
 
             <label>Create a password</label>
-            <input type="text"className="border block" />
+            <input type="password"className="border block" />
 
             <label>Your Email</label>
             <input type="text"className="border block" placeholder="example@email.com" />
