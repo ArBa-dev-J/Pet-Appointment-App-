@@ -1,7 +1,11 @@
 import { Link } from "react-router";
 import { useForm } from "react-hook-form";
+const API_URL = import.meta.env.VITE_API_URL;
 
 function SignUpForm() {
+
+
+
   const {
     register,
     handleSubmit,
@@ -10,8 +14,24 @@ function SignUpForm() {
   } = useForm();
 
   const onSubmit = async (data) => {
-    console.log(JSON.stringify(data));
-    reset();
+    try {
+      const requestOptions = {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      };
+      const response = await fetch(
+        `${API_URL}/user/register`,
+        requestOptions,
+      );
+      if (response.ok) {
+        reset();
+      } else {
+        throw new Error("Data was not sent");
+      }
+    } catch (error) {
+      alert(error.message);
+    }
   };
 
   return (
