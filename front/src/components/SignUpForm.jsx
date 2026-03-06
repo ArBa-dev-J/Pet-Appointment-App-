@@ -1,11 +1,13 @@
 import { Link } from "react-router";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
+import { useState } from "react";
+import axios from "axios";
 const API_URL = import.meta.env.VITE_API_URL;
 
 function SignUpForm() {
   let navigate = useNavigate();
-
+  const [error, setError] = useState(null);
 
   const {
     register,
@@ -14,29 +16,21 @@ function SignUpForm() {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = async (data) => {
-    try {
-      const requestOptions = {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      };
-      const response = await fetch(
-        `${API_URL}/user/register`,
-        requestOptions,
-      );
-      if (response.ok) {
-        alert("You have successfully signed up");
-        reset();
-        navigate("/");
-      } else {
-        throw new Error("Data was not sent");
-      }
-    } catch (error) {
-      alert(error.message);
-    }
-  };
+ const onSubmit = async (data) => {
+  try {
+    await axios.post(`${API_URL}/user/register`, data);
 
+    alert("Successfully signed up");
+    reset();
+    navigate("/");
+
+  } catch (error) {
+    setError(
+      error.response?.data?.message ||
+      "Server error. Please try again."
+    );
+  }
+};
   return (
     <>
       <main>
@@ -114,6 +108,7 @@ function SignUpForm() {
             )}
 
             <input type="submit" value="Sign Up" />
+            {error && <p>{error}</p>}
           </form>
         </section>
       </main>
