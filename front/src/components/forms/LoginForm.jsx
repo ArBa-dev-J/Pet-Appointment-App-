@@ -9,6 +9,7 @@ import axios from "axios";
 const API_URL = import.meta.env.VITE_API_URL;
 
 function LoginForm() {
+  let navigate = useNavigate();
   const [error, setError] = useState(null);
   const { setUser } = useContext(UserContext);
 
@@ -20,16 +21,18 @@ function LoginForm() {
   } = useForm();
 
   const onSubmit = async (data) => {
-    console.log(setUser);
     try {
       const response = await axios.post(`${API_URL}/user/login`, data);
-      setUser(response.data.data);
+
+      setUser(response);
       reset();
-      // navigator();
+      navigate(`/user/${response.data.data.userId}/apointments`);
+
 
     } catch (error) {
       setError(error.message);
     }
+
   };
 
   return (
