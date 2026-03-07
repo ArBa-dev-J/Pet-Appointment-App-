@@ -3,7 +3,7 @@ import Home from "./components/Home";
 import ProtectedRoute from "./components/ProtectedRoute";
 import SignUpForm from "./components/forms/SignUpForm";
 import LoginForm from "./components/forms/LoginForm";
-import UserPatients from "./components/user/UserPatients";
+import UserPatients from "./components/user/UserPage";
 
 
 function App() {
