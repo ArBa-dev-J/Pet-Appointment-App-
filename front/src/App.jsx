@@ -4,7 +4,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import SignUpForm from "./components/forms/SignUpForm";
 import LoginForm from "./components/forms/LoginForm";
 import UserPatients from "./components/user/UserPage";
-
+import PatientApForm from "./components/forms/PatientApForm";
 
 function App() {
   return (
@@ -18,6 +18,14 @@ function App() {
         element={
           <ProtectedRoute>
             <UserPatients/>
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/user/:userId/apointments/new"
+        element={
+          <ProtectedRoute>
+            <PatientApForm/>
           </ProtectedRoute>
         }
       />
