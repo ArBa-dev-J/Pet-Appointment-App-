@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router";
 import Home from "./components/Home";
-import SignUpForm from "./components/SignUpForm";
-import LoginForm from "./components/LoginForm";
+import SignUpForm from "./components/forms/SignUpForm";
+import LoginForm from "./components/forms/LoginForm";
 function App() {
   return (
    <>

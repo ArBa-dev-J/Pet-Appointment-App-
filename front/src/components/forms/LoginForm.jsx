@@ -2,12 +2,15 @@ import { Link } from "react-router";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
 import { useState } from "react";
+import { useContext } from "react";
+import { UserContext } from "../../contexts/UserContext";
 import axios from "axios";
-const API_URL = import.meta.env.VITE_API_URL;
 
+const API_URL = import.meta.env.VITE_API_URL;
 
 function LoginForm() {
   const [error, setError] = useState(null);
+  const { setUser } = useContext(UserContext);
 
   const {
     register,
@@ -17,9 +20,10 @@ function LoginForm() {
   } = useForm();
 
   const onSubmit = async (data) => {
-    console.log(data);
+    console.log(setUser);
     try {
-      await axios.post(`${API_URL}/user/login`, data);
+      const response = await axios.post(`${API_URL}/user/login`, data);
+      setUser(response.data.data);
       reset();
       // navigator();
 
