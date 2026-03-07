@@ -6,10 +6,18 @@ meta {
 
 get {
   url: http://localhost:3000/api/v1/user/login
-  body: none
+  body: json
   auth: inherit
+}
+
+body:json {
+  {
+    "emailAddress": "test@gmail.com",
+    "password": "password"
+  }
 }
 
 settings {
   encodeUrl: true
+  timeout: 0
 }

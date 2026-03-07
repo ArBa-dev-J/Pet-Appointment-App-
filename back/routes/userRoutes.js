@@ -23,7 +23,7 @@ const userRoutes = express.Router();
 // userRoutes.route("/").get(getAllUsersC);
 userRoutes.route("/logout").get(protect, logout);
 userRoutes.route("/register").post(validateNewUser, validate, registerUserC);
-userRoutes.route("/login").get(validateNewLogin, validate, loginC);
+userRoutes.route("/login").post(validateNewLogin, validate, loginC);
 // user patients
 // add new patient
 userRoutes

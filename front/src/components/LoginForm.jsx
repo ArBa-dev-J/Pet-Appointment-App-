@@ -1,7 +1,14 @@
 import { Link } from "react-router";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router";
+import { useState } from "react";
+import axios from "axios";
+const API_URL = import.meta.env.VITE_API_URL;
+
 
 function LoginForm() {
+  const [error, setError] = useState(null);
+
   const {
     register,
     handleSubmit,
@@ -10,8 +17,15 @@ function LoginForm() {
   } = useForm();
 
   const onSubmit = async (data) => {
-    console.log(JSON.stringify(data));
-    reset();
+    console.log(data);
+    try {
+      await axios.post(`${API_URL}/user/login`, data);
+      reset();
+      // navigator();
+
+    } catch (error) {
+      setError(error.message);
+    }
   };
 
   return (
@@ -63,6 +77,7 @@ function LoginForm() {
               </span>
             )}
             <input type="submit" value="Login" />
+            {error && <p>{error}</p>}
           </form>
         </section>
       </main>

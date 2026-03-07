@@ -25,10 +25,7 @@ function SignUpForm() {
     navigate("/");
 
   } catch (error) {
-    setError(
-      error.response?.data?.message ||
-      "Server error. Please try again."
-    );
+    setError(error.message)
   }
 };
   return (
