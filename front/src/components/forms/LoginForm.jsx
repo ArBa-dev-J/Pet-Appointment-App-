@@ -25,6 +25,7 @@ function LoginForm() {
       const response = await axios.post(`${API_URL}/user/login`, data);
 
       setUser(response);
+      localStorage.setItem("user", JSON.stringify(response));
       reset();
       navigate(`/user/${response.data.data.userId}/apointments`);
 
