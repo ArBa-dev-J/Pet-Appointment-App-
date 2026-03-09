@@ -31,6 +31,9 @@ function PatientApForm() {
       await axios.post(
         `${API_URL}/user/${user.user.data.data.userId}/patients/new`,
         data,
+        {
+          withCredentials: true,
+        },
       );
       alert("Successfully created new appointment");
       reset();
@@ -66,6 +69,7 @@ function PatientApForm() {
               })}
               className="block border"
             />
+            {errors.name && <span>Appointment name is required</span>}
 
             <label>Appointment date</label>
             <input
@@ -75,6 +79,7 @@ function PatientApForm() {
               })}
               className="block border"
             />
+            {errors.date && <span>Date is required</span>}
 
             <label>Appointment description</label>
             <input
@@ -86,6 +91,7 @@ function PatientApForm() {
               })}
               className="block border"
             />
+            {errors.date && <span>Description is required</span>}
 
             <input type="submit" value="Put new appointment" />
             {<p>{error}</p>}

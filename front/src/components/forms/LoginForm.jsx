@@ -22,18 +22,19 @@ function LoginForm() {
 
   const onSubmit = async (data) => {
     try {
-      const response = await axios.post(`${API_URL}/user/login`, data);
+      const response = await axios.post(`${API_URL}/user/login`, data, {
+        withCredentials: true
+      });
 
+     
+      // user
       setUser(response);
       localStorage.setItem("user", JSON.stringify(response));
       reset();
       navigate(`/user/${response.data.data.userId}/apointments`);
-
-
     } catch (error) {
       setError(error.message);
     }
-
   };
 
   return (
