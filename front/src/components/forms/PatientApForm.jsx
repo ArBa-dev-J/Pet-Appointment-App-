@@ -1,6 +1,6 @@
 import { Link } from "react-router";
 import { UserContext } from "../../contexts/UserContext";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
 import axios from "axios";
@@ -9,7 +9,7 @@ const API_URL = import.meta.env.VITE_API_URL;
 
 function PatientApForm() {
   let navigate = useNavigate();
-  //   const [error, setError] = useState(null);
+  const [error, setError] = useState(null);
   const user = useContext(UserContext);
 
   const {
@@ -19,12 +19,27 @@ function PatientApForm() {
     formState: { errors },
   } = useForm({
     defaultValues: {
+      name: "",
+      date: "",
       isConfirmed: false,
+      description: "",
     },
   });
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = async (data) => {
+    try {
+      await axios.post(
+        `${API_URL}/user/${user.user.data.data.userId}/patients/new`,
+        data,
+      );
+      alert("Successfully created new appointment");
+      reset();
+      navigate(`/user/${user.user.data.data.userId}/apointments`);
+    } catch (error) {
+      setError(error.message);
+      console.log(JSON.stringify(data));
+    }
+    // console.log(user.user.data.data.userId);
   };
 
   return (
@@ -73,6 +88,7 @@ function PatientApForm() {
             />
 
             <input type="submit" value="Put new appointment" />
+            {<p>{error}</p>}
           </form>
         </section>
       </main>

@@ -14,8 +14,8 @@ const validatePatient = [
     .isString()
     .withMessage("Name must be a string")
     .custom((value) => {
-      if (!/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/.test(value)) {
-        throw new Error('Value must be YYYY-MM-DDTHH:mm:ss.SSSZ');
+      if (!/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/.test(value)) {
+        throw new Error('Value must be YYYY-MM-DDTHH:mm');
       }
       return true;
     })
@@ -28,7 +28,7 @@ const validatePatient = [
     .withMessage("Name must be a string")
     .trim()
     .isLength({ min: 2, max: 1000 })
-    .withMessage("Must be from 2 to 100 chars longs"),
+    .withMessage("Must be from 2 to 1000 chars longs"),
 ];
 
 export default validatePatient;

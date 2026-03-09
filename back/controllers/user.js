@@ -123,7 +123,7 @@ export const protect = async (req, res, next) => {
     let token = req.cookies?.jwt;
 
     if (!token) {
-      throw new AppError("You are not logged in! Please log in to get access");
+      throw new AppError("You are not logged in! Please log in to get access", 401);
     }
 
     const decodedUser = jwt.verify(token, process.env.JWT_SECRET);
