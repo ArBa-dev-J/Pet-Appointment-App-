@@ -1,4 +1,10 @@
+
+
 function UserApointments({ appointment }) {
+    const getConfirmColor = () => {
+        if (appointment.isConfirmed === true) return "green";
+        else return "red";
+    }
     return (
         <>
             <div className="border">
@@ -7,7 +13,7 @@ function UserApointments({ appointment }) {
                 <p className="p-2">
                     {appointment.description}
                 </p>
-                {appointment.isConfirmed ? <p className="p-2">Is confiormed</p> : <p className="p-2">Is not confirmed</p>}
+                {appointment.isConfirmed ? <p style={{ color: getConfirmColor() }} className="p-2">Is confiormed</p> : <p style={{ color: getConfirmColor() }} className="p-2">Is not confirmed</p>}
             </div>
         </>
     );
