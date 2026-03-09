@@ -1,8 +1,8 @@
-function UserApointments() {
+function UserApointments({ appointment }) {
   return (
     <>
       <div className="border">
-        <h1 className="p-2">Patient Appointment</h1>
+        <h1 className="p-2">{appointment.name}</h1>
         <p className="p-2">yyyy-mm-dd hh-mm</p>
         <p className="p-2">
           Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sequi
