@@ -35,7 +35,7 @@ function UserPatients() {
 ``
         <UserApointmentSearch />
 
-        <section>
+        <section className="p-5">
           <UserApointments />
         </section>
       </main>
