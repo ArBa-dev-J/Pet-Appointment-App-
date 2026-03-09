@@ -8,7 +8,7 @@ import axios from "axios";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
-function UserPatients() {
+function UserPage() {
   const user = useContext(UserContext);
   const [show, setShow] = useState(false);
   const [error, setError] = useState(null);
@@ -69,4 +69,4 @@ function UserPatients() {
   );
 }
 
-export default UserPatients;
+export default UserPage;
