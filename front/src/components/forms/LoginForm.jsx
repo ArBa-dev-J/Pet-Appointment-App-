@@ -85,7 +85,7 @@ function LoginForm() {
                 long
               </span>
             )}
-            <input type="submit" value="Login" />
+            <input type="submit" className="border" value="Login" />
             {error && <p>{error}</p>}
           </form>
         </section>

@@ -104,7 +104,7 @@ function SignUpForm() {
               </span>
             )}
 
-            <input type="submit" value="Sign Up" />
+            <input type="submit" className="border" value="Sign Up" />
             {error && <p>{error}</p>}
           </form>
         </section>
