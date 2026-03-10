@@ -3,7 +3,7 @@ import Home from "./components/Home";
 import ProtectedRoute from "./components/ProtectedRoute";
 import SignUpForm from "./components/forms/SignUpForm";
 import LoginForm from "./components/forms/LoginForm";
-import UserPatients from "./components/user/UserPage";
+import UserPage from "./components/user/UserPage";
 import PatientApForm from "./components/forms/PatientApForm";
 
 function App() {
@@ -17,7 +17,7 @@ function App() {
         path="/user/:userId/apointments"
         element={
           <ProtectedRoute>
-            <UserPatients/>
+            <UserPage/>
           </ProtectedRoute>
         }
       />
