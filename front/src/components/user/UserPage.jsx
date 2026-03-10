@@ -14,6 +14,26 @@ function UserPage() {
   const [error, setError] = useState(null);
   const [appointments, setAppointments] = useState([]);
 
+  // useState for sort and filters
+
+  const [sort, setSort] = useState(``);
+
+  const changeSortASC = () => {
+    setSort(`ASC`);
+  };
+
+  const changeSortDESC = () => {
+    setSort(`DESC`);
+  };
+
+  const changeSortDATEDESC = () => {
+    setSort(`DATEDESC`);
+  };
+
+    const changeSortDATEASC = () => {
+    setSort(`DATEASC`);
+  };
+
   const toShow = () => setShow(true);
   const notToShow = () => setShow(false);
 
@@ -22,7 +42,9 @@ function UserPage() {
   const userFetch = async () => {
     try {
       const response = await axios.get(
-        `${API_URL}/user/${user.user.data.data.userId}/patients`,
+        `${API_URL}/user/${user.user.data.data.userId}/patients
+      ${sort ? `?sort=${sort}` : null}
+        `,
         {
           withCredentials: true,
         },
@@ -60,7 +82,13 @@ function UserPage() {
         <UserApointmentSearch />
         <section className="p-5">
           <p className="text-center">{error}</p>
-          {appointments.map((appointment) => <UserApointments userFetch={userFetch} key={appointment.id} appointment={appointment} />)}
+          {appointments.map((appointment) => (
+            <UserApointments
+              userFetch={userFetch}
+              key={appointment.id}
+              appointment={appointment}
+            />
+          ))}
 
           {/* <UserApointments key={appointment.id} appointment={appointments} /> */}
         </section>
