@@ -30,7 +30,7 @@ function UserPage() {
     setSort(`DATEDESC`);
   };
 
-    const changeSortDATEASC = () => {
+  const changeSortDATEASC = () => {
     setSort(`DATEASC`);
   };
 
@@ -42,9 +42,7 @@ function UserPage() {
   const userFetch = async () => {
     try {
       const response = await axios.get(
-        `${API_URL}/user/${user.user.data.data.userId}/patients
-      ${sort ? `?sort=${sort}` : null}
-        `,
+        `${API_URL}/user/${user.user.data.data.userId}/patients${sort ? `?sort=${sort}` : ""}`,
         {
           withCredentials: true,
         },
@@ -59,7 +57,7 @@ function UserPage() {
 
   useEffect(() => {
     userFetch();
-  }, []);
+  }, [sort]);
 
   return (
     <>
@@ -79,7 +77,12 @@ function UserPage() {
           </Link>
         </div>
         ``
-        <UserApointmentSearch />
+        <UserApointmentSearch
+          changeSortASC={changeSortASC}
+          changeSortDESC={changeSortDESC}
+          changeSortDATEDESC={changeSortDATEDESC}
+          changeSortDATEASC={changeSortDATEASC}
+        />
         <section className="p-5">
           <p className="text-center">{error}</p>
           {appointments.map((appointment) => (
