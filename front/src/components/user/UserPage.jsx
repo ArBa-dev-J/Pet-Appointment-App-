@@ -60,7 +60,7 @@ function UserPage() {
         <UserApointmentSearch />
         <section className="p-5">
           <p className="text-center">{error}</p>
-          {appointments.map((appointment) =>  <UserApointments key={appointment.id} appointment={appointment} />)}
+          {appointments.map((appointment) => <UserApointments userFetch={userFetch} key={appointment.id} appointment={appointment} />)}
 
           {/* <UserApointments key={appointment.id} appointment={appointments} /> */}
         </section>
