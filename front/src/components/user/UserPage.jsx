@@ -34,6 +34,14 @@ function UserPage() {
     setSort(`DATEASC`);
   };
 
+  // search by name
+
+  const [name, setName] = useState();
+
+  const nameChange = (e) => {
+    setName(e.target.value);
+  };
+
   const toShow = () => setShow(true);
   const notToShow = () => setShow(false);
 
@@ -42,7 +50,7 @@ function UserPage() {
   const userFetch = async () => {
     try {
       const response = await axios.get(
-        `${API_URL}/user/${user.user.data.data.userId}/patients${sort ? `?sort=${sort}` : ""}`,
+        `${API_URL}/user/${user.user.data.data.userId}/patients${sort ? `?sort=${sort}` : ""}${name ? `?name=${name}` : ""}`,
         {
           withCredentials: true,
         },
@@ -57,7 +65,7 @@ function UserPage() {
 
   useEffect(() => {
     userFetch();
-  }, [sort]);
+  }, [sort, name]);
 
   return (
     <>
@@ -82,6 +90,7 @@ function UserPage() {
           changeSortDESC={changeSortDESC}
           changeSortDATEDESC={changeSortDATEDESC}
           changeSortDATEASC={changeSortDATEASC}
+          nameChange={nameChange}
         />
         <section className="p-5">
           <p className="text-center">{error}</p>

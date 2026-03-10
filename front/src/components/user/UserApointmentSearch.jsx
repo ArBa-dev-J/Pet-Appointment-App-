@@ -3,6 +3,7 @@ function UserApointmentSearch({
   changeSortDESC,
   changeSortDATEDESC,
   changeSortDATEASC,
+  nameChange,
 }) {
 
 
@@ -10,7 +11,7 @@ function UserApointmentSearch({
     <>
       <section className="flex justify-center">
         <div>
-          <input type="text" className="border " />
+          <input onChange={nameChange} type="text" className="border " />
         </div>
         <div>
           <select className="border-r border-t border-b h-[0.7cm]">
