@@ -1,11 +1,14 @@
 import axios from "axios"
+import { AppointmentsContext } from "../../contexts/AppointmetsContext";
+import { useContext } from "react";
 import { useState } from "react";
 const API_URL = import.meta.env.VITE_API_URL;
 
 
-function UserAskForDelete({ notToShow, appointment, userFetch, toShow }) {
+function UserAskForDelete({ notToShow, userFetch, appointment }) {
 
     const [error, setError] = useState("");
+    const { setAppointments } = useContext(AppointmentsContext);
 
     // delete data
 
@@ -14,8 +17,11 @@ function UserAskForDelete({ notToShow, appointment, userFetch, toShow }) {
             await axios.delete(`${API_URL}/user/${id}/patients/delete`, {
                 withCredentials: true
             });
-            
-            toShow();
+
+            setAppointments(prev =>
+                prev.filter(appointment => appointment.pacientId !== appointment.pacientId)
+            );
+            notToShow();
             userFetch();
         } catch (error) {
             setError(error.message)
