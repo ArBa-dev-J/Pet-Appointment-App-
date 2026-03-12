@@ -3,6 +3,7 @@ import UserApointments from "./UserApointments";
 import UserApointmentSearch from "./UserApointmentSearch";
 import LogOut from "./UserLogout";
 import { UserContext } from "../../contexts/UserContext";
+import { AppointmentsContext } from "../../contexts/AppointmetsContext";
 import { useContext, useState, useEffect } from "react";
 import axios from "axios";
 
@@ -10,9 +11,11 @@ const API_URL = import.meta.env.VITE_API_URL;
 
 function UserPage() {
   const user = useContext(UserContext);
+  const { setAppointments } = useContext(AppointmentsContext)
+  const appointmentsU = useContext(AppointmentsContext);
   const [show, setShow] = useState(false);
   const [error, setError] = useState(null);
-  const [appointments, setAppointments] = useState([]);
+
 
   // useState for sort and filters
 
@@ -98,7 +101,7 @@ function UserPage() {
         />
         <section className="p-5">
           <p className="text-center">{error}</p>
-          {appointments.map((appointment) => (
+          {appointmentsU.appointments.map((appointment) => (
             <UserApointments
               userFetch={userFetch}
               key={appointment.id}
