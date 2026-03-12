@@ -1,10 +1,15 @@
 import axios from "axios";
 import { useState } from "react";
+import UserAskForDelete from "./UserAskeForDelete";
 const API_URL = import.meta.env.VITE_API_URL;
 
 function UserApointments({ appointment, userFetch }) {
 
     const [error, setError] = useState("");
+    const [show, setShow] = useState(false);
+
+    const toShow = () => setShow(true);
+    const notToShow = () => setShow(false);
     // delete data
 
     const deleteData = async (id) => {
@@ -29,7 +34,8 @@ function UserApointments({ appointment, userFetch }) {
         <>
             <div className="border mt-5">
                 <div className="text-right pr-5 pt-2">
-                    <button onClick={() => deleteData(appointment.pacientId)} type="button">X</button>
+                    <button onClick={() => toShow()} type="button">X</button>
+                    {show ? <UserAskForDelete notToShow={() => notToShow}/> : null}
                 </div>
 
                 <div className="relative bottom-3">
@@ -40,7 +46,7 @@ function UserApointments({ appointment, userFetch }) {
                     </p>
                     {appointment.isConfirmed ? <p style={{ color: getConfirmColor() }} className="p-2">Is confiormed</p> : <p style={{ color: getConfirmColor() }} className="p-2">Is not confirmed</p>}
                 </div>
-           <p className="text-center pb-2 ">{error}</p>
+                <p className="text-center pb-2 ">{error}</p>
             </div>
         </>
     );
