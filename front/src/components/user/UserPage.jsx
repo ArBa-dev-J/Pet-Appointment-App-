@@ -50,9 +50,13 @@ function UserPage() {
   const userFetch = async () => {
     try {
       const response = await axios.get(
-        `${API_URL}/user/${user.user.data.data.userId}/patients${sort ? `?sort=${sort}` : ""}${name ? `?name=${name}` : ""}`,
+        `${API_URL}/user/${user.user.data.data.userId}/patients`,
         {
           withCredentials: true,
+          params: {
+            name: name,
+            sort: sort,
+          }
         },
       );
 
