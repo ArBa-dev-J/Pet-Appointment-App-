@@ -26,10 +26,16 @@ function UserApointments({ appointment, userFetch }) {
 
                 <div className="relative bottom-3">
                     <h1 className="p-2">{appointment.name}</h1>
+
+                    <div className="flex items-center">
                     <p className="p-2">{appointment.date}</p>
+                    <p>{appointment.time}</p>
+                    </div>
+
                     <p className="p-2">
                         {appointment.description}
                     </p>
+
                     {appointment.isConfirmed ? <p style={{ color: getConfirmColor() }} className="p-2">Is confiormed</p> : <p style={{ color: getConfirmColor() }} className="p-2">Is not confirmed</p>}
                 </div>
 
