@@ -32,7 +32,15 @@ export const getAllPatientsByUserIdM = async (userId, name, sort) => {
   const orderBy = sortMap[sort] || sql``;
 
   const patientsList = sql`
-SELECT * FROM patients
+SELECT 
+  "pacientId",
+  name,
+   TO_CHAR(date, 'YYYY-MM-DD') AS date,
+   TO_CHAR(date, 'HH24:MI') as TIME,
+  description,
+  "isConfirmed",
+  "userId"
+FROM patients
 WHERE "userId" = ${Number(userId)}
 ${name ? sql`AND name ILIKE ${`%` + name + `%`}` : sql``}
 ${sort ? sql`ORDER BY ${orderBy}` : sql``}
