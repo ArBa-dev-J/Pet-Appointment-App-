@@ -65,8 +65,6 @@ function UserPage() {
       setAppointments(response.data.data);
       // console.log(response.data.data);
     } catch (error) {
-      setError(error.message);
-
       // testing error messages from back
       const match = error.response.data.match(/<pre>([\s\S]*?)<\/pre>/);
       let errorText = match ? match[1] : null;
@@ -82,7 +80,7 @@ function UserPage() {
       const firstLine = errorText.split("\n")[0];
       const message = firstLine.replace(/^Error:\s*/, "");
 
-      console.log(message);
+      setError(message);
     }
   };
 
