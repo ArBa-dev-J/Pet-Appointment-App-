@@ -1,4 +1,5 @@
 import axios from "axios";
+import errorHandler from "../../utlis/errorHandler";
 import { useNavigate } from "react-router";
 import { useState } from "react";
 import { UserContext } from "../../contexts/UserContext";
@@ -21,7 +22,7 @@ function LogOut({ notToShow }) {
       setUser(null);
       navigate(`/`);
     } catch (error) {
-      setError(error.message);
+      setError(errorHandler(error));
     }
   };
 

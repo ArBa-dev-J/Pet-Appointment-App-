@@ -1,4 +1,5 @@
 import axios from "axios"
+import errorHandler from "../../utlis/errorHandler";
 import { AppointmentsContext } from "../../contexts/AppointmetsContext";
 import { useContext } from "react";
 import { useState } from "react";
@@ -24,7 +25,7 @@ function UserAskForDelete({ notToShow, userFetch, appointment }) {
             notToShow();
             userFetch();
         } catch (error) {
-            setError(error.message)
+            setError(errorHandler(error));
         }
     }
 

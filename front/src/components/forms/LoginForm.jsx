@@ -4,6 +4,7 @@ import { useNavigate } from "react-router";
 import { useState } from "react";
 import { useContext } from "react";
 import { UserContext } from "../../contexts/UserContext";
+import errorHandler from "../../utlis/errorHandler";
 import axios from "axios";
 
 const API_URL = import.meta.env.VITE_API_URL;
@@ -33,7 +34,7 @@ function LoginForm() {
       reset();
       navigate(`/user/${response.data.data.userId}/apointments`);
     } catch (error) {
-      setError(error.message);
+      setError(errorHandler(error));
     }
   };
 

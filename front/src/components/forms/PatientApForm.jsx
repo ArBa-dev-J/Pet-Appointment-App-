@@ -3,6 +3,7 @@ import { UserContext } from "../../contexts/UserContext";
 import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
+import errorHandler from "../../utlis/errorHandler";
 import axios from "axios";
 
 const API_URL = import.meta.env.VITE_API_URL;
@@ -39,8 +40,7 @@ function PatientApForm() {
       reset();
       navigate(`/user/${user.user.data.data.userId}/apointments`);
     } catch (error) {
-      setError(error.message);
-      console.log(JSON.stringify(data));
+      setError(errorHandler(error)); 
     }
     // console.log(user.user.data.data.userId);
   };
