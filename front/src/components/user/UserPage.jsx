@@ -11,11 +11,10 @@ const API_URL = import.meta.env.VITE_API_URL;
 
 function UserPage() {
   const user = useContext(UserContext);
-  const { setAppointments } = useContext(AppointmentsContext)
+  const { setAppointments } = useContext(AppointmentsContext);
   const appointmentsU = useContext(AppointmentsContext);
   const [show, setShow] = useState(false);
   const [error, setError] = useState(null);
-
 
   // useState for sort and filters
 
@@ -59,7 +58,7 @@ function UserPage() {
           params: {
             name: name,
             sort: sort,
-          }
+          },
         },
       );
 
@@ -67,6 +66,23 @@ function UserPage() {
       // console.log(response.data.data);
     } catch (error) {
       setError(error.message);
+
+      // testing error messages from back
+      const match = error.response.data.match(/<pre>([\s\S]*?)<\/pre>/);
+      let errorText = match ? match[1] : null;
+
+      // Clean HTML entities and <br>
+      if (errorText) {
+        errorText = errorText
+          .replace(/<br\s*\/?>/g, "\n")
+          .replace(/&nbsp;/g, " ")
+          .trim();
+      }
+
+      const firstLine = errorText.split("\n")[0];
+      const message = firstLine.replace(/^Error:\s*/, "");
+
+      console.log(message);
     }
   };
 
