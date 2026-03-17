@@ -49,7 +49,7 @@ function SignUpForm() {
                 required: true,
                 minLength: 2,
                 maxLength: 100,
-                pattern: /^[A-Za-z]+(?:\s+[A-Za-z]+)$/,
+                pattern: /^\p{L}+(?:[\s-]\p{L}+)+$/u,
               })}
               type="text"
               className="border block"
