@@ -1,4 +1,5 @@
 import { Link } from "react-router";
+import errorHandler from "../../utlis/errorHandler";
 import UserApointments from "./UserApointments";
 import UserApointmentSearch from "./UserApointmentSearch";
 import LogOut from "./UserLogout";
@@ -65,22 +66,7 @@ function UserPage() {
       setAppointments(response.data.data);
       // console.log(response.data.data);
     } catch (error) {
-      // testing error messages from back
-      const match = error.response.data.match(/<pre>([\s\S]*?)<\/pre>/);
-      let errorText = match ? match[1] : null;
-
-      // Clean HTML entities and <br>
-      if (errorText) {
-        errorText = errorText
-          .replace(/<br\s*\/?>/g, "\n")
-          .replace(/&nbsp;/g, " ")
-          .trim();
-      }
-
-      const firstLine = errorText.split("\n")[0];
-      const message = firstLine.replace(/^Error:\s*/, "");
-
-      setError(message);
+      setError(errorHandler(error));
     }
   };
 
