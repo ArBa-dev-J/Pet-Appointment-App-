@@ -1,4 +1,5 @@
 import { useState } from "react";
+import refresh from "../../assets/refresh.png";
 import UserAskForDelete from "./UserAskeForDelete";
 
 
@@ -18,9 +19,10 @@ function UserApointments({ appointment, userFetch }) {
 
     return (
         <>
-            <div className="border mt-5">
-                <div className="text-right pr-5 pt-2">
-                    <button onClick={() => toShow()} type="button">X</button>
+            <div className="border mt-5 pb-5">
+                <div className="flex justify-end pr-5 pt-5 gap-5">
+                    <button  className="block" onClick={() => toShow()} type="button">X</button>
+                    <button className="block" type="button"><img src={refresh}/></button>
                     {show ? <UserAskForDelete notToShow={() => notToShow} appointment={appointment} userFetch={() => userFetch()} toShow={() => toShow} /> : null}
                 </div>
 
