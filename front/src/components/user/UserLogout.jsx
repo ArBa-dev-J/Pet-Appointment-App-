@@ -3,12 +3,14 @@ import errorHandler from "../../utlis/errorHandler";
 import { useNavigate } from "react-router";
 import { useState } from "react";
 import { UserContext } from "../../contexts/UserContext";
+import { AppointmentsContext } from "../../contexts/AppointmetsContext";
 import { useContext } from "react";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
 function LogOut({ notToShow }) {
   const { setUser } = useContext(UserContext);
+  const { setAppointments } = useContext(AppointmentsContext);
 
   let navigate = useNavigate();
   const [error, setError] = useState(null);
@@ -20,6 +22,7 @@ function LogOut({ notToShow }) {
       });
 
       setUser(null);
+      setAppointments([]);
       navigate(`/`);
     } catch (error) {
       setError(errorHandler(error));
