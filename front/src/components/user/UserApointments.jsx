@@ -1,4 +1,5 @@
 import { useState } from "react";
+import close from "../../assets/close(1).png";
 import refresh from "../../assets/refresh.png";
 import UserAskForDelete from "./UserAskeForDelete";
 
@@ -21,8 +22,8 @@ function UserApointments({ appointment, userFetch }) {
         <>
             <div className="border mt-5 pb-5">
                 <div className="flex justify-end pr-5 pt-5 gap-5">
-                    <button  className="block" onClick={() => toShow()} type="button">X</button>
-                    <button className="block" type="button"><img src={refresh}/></button>
+                    <button className="block" onClick={() => toShow()} type="button"><img src={close} alt="close" /></button>
+                    <button className="block" type="button"><img src={refresh} alt="update" /></button>
                     {show ? <UserAskForDelete notToShow={() => notToShow} appointment={appointment} userFetch={() => userFetch()} toShow={() => toShow} /> : null}
                 </div>
 
@@ -30,8 +31,8 @@ function UserApointments({ appointment, userFetch }) {
                     <h1 className="p-2">{appointment.name}</h1>
 
                     <div className="flex items-center">
-                    <p className="p-2">{appointment.date}</p>
-                    <p>{appointment.time}</p>
+                        <p className="p-2">{appointment.date}</p>
+                        <p>{appointment.time}</p>
                     </div>
 
                     <p className="p-2">
