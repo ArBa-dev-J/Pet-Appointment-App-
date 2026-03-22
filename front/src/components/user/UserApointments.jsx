@@ -4,7 +4,7 @@ import refresh from "../../assets/refresh.png";
 import UserAskForDelete from "./UserAskeForDelete";
 
 
-function UserApointments({ appointment, userFetch }) {
+function UserApointments({ appointments, userFetch }) {
 
 
     const [show, setShow] = useState(false);
@@ -14,7 +14,7 @@ function UserApointments({ appointment, userFetch }) {
 
     // colors based if confirmed or not
     const getConfirmColor = () => {
-        if (appointment.isConfirmed === true) return "green";
+        if (appointments.isConfirmed === true) return "green";
         else return "red";
     }
 
@@ -24,22 +24,22 @@ function UserApointments({ appointment, userFetch }) {
                 <div className="flex justify-end pr-5 pt-5 gap-5">
                     <button className="block" onClick={() => toShow()} type="button"><img src={close} alt="close" /></button>
                     <button className="block" type="button"><img src={refresh} alt="update" /></button>
-                    {show ? <UserAskForDelete notToShow={() => notToShow} appointment={appointment} userFetch={() => userFetch()} toShow={() => toShow} /> : null}
+                    {show ? <UserAskForDelete notToShow={() => notToShow} appointment={appointments} userFetch={() => userFetch()} toShow={() => toShow} /> : null}
                 </div>
 
                 <div className="relative bottom-3">
-                    <h1 className="p-2">{appointment.name}</h1>
+                    <h1 className="p-2">{appointments.name}</h1>
 
                     <div className="flex items-center">
-                        <p className="p-2">{appointment.date}</p>
-                        <p>{appointment.time}</p>
+                        <p className="p-2">{appointments.date}</p>
+                        <p>{appointments.time}</p>
                     </div>
 
                     <p className="p-2">
-                        {appointment.description}
+                        {appointments.description}
                     </p>
 
-                    {appointment.isConfirmed ? <p style={{ color: getConfirmColor() }} className="p-2">Is confiormed</p> : <p style={{ color: getConfirmColor() }} className="p-2">Is not confirmed</p>}
+                    {appointments.isConfirmed ? <p style={{ color: getConfirmColor() }} className="p-2">Is confiormed</p> : <p style={{ color: getConfirmColor() }} className="p-2">Is not confirmed</p>}
                 </div>
 
             </div>

@@ -5,6 +5,7 @@ import UserApointmentSearch from "./UserApointmentSearch";
 import LogOut from "./UserLogout";
 import { UserContext } from "../../contexts/UserContext";
 import { AppointmentsContext } from "../../contexts/AppointmetsContext";
+import { SingleAppointmentContext } from "../../contexts/SingleAppointment";
 import { useContext, useState, useEffect } from "react";
 import axios from "axios";
 
@@ -14,6 +15,8 @@ function UserPage() {
   const user = useContext(UserContext);
   const { setAppointments } = useContext(AppointmentsContext);
   const appointmentsU = useContext(AppointmentsContext);
+  const {appointment ,setAppointment} = useContext(SingleAppointmentContext);
+  
   const [show, setShow] = useState(false);
   const [error, setError] = useState(null);
 
@@ -101,11 +104,12 @@ function UserPage() {
         />
         <section className="p-5">
           <p className="text-center">{error}</p>
-          {appointmentsU.appointments.map((appointment) => (
+          {appointmentsU.appointments.map((appointments) => (
             <UserApointments
               userFetch={userFetch}
-              key={appointment.id}
-              appointment={appointment}
+              key={appointments.id}
+              appointments={appointments}
+
             />
           ))}
 
