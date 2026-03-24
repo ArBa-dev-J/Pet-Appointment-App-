@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router";
-import { useContext, useState } from "react";
-import { AppointmentsContext } from "./contexts/AppointmetsContext";
+import { useContext } from "react";
+import { SingleAppointmentContext } from "./contexts/SingleAppointment";
 import Home from "./components/Home";
 import ProtectedRoute from "./components/ProtectedRoute";
 import SignUpForm from "./components/forms/SignUpForm";
@@ -10,8 +10,7 @@ import UserPage from "./components/user/UserPage";
 import PatientApForm from "./components/forms/PatientApForm";
 
 function App() {
-  const appointments = useContext(AppointmentsContext);
-  const [selectedAppointment, setSelectedAppointment] = useState(null);
+  const { appointment } = useContext(SingleAppointmentContext);
 
   
   return (
@@ -39,14 +38,14 @@ function App() {
           }
         />
 
-        <Route
+        {appointment && <Route
           path="/user/:userId/apointments/update"
           element={
             <ProtectedRoute>
-              <UpdateForm />
+              <UpdateForm appointmentS={appointment}/>
             </ProtectedRoute>
           }
-        />
+        />}
       </Routes>
     </>
   )

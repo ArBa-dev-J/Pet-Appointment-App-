@@ -1,4 +1,5 @@
-function UpdateForm(){
+function UpdateForm({appointmentS}){
+    console.log(appointmentS);
 return (
     <>
     

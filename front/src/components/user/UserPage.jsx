@@ -15,8 +15,8 @@ function UserPage() {
   const user = useContext(UserContext);
   const { setAppointments } = useContext(AppointmentsContext);
   const appointmentsU = useContext(AppointmentsContext);
-  const {appointment ,setAppointment} = useContext(SingleAppointmentContext);
-  
+  const { setAppointment } = useContext(SingleAppointmentContext);
+
   const [show, setShow] = useState(false);
   const [error, setError] = useState(null);
 
@@ -94,7 +94,7 @@ function UserPage() {
             <button className="border">New appointment</button>
           </Link>
         </div>
-        ``
+
         <UserApointmentSearch
           changeSortASC={changeSortASC}
           changeSortDESC={changeSortDESC}
@@ -109,7 +109,9 @@ function UserPage() {
               userFetch={userFetch}
               key={appointments.id}
               appointments={appointments}
-
+              toUpdate={() => {
+                setAppointment(appointments);
+              }}
             />
           ))}
 
