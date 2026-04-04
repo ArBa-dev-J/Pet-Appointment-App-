@@ -13,8 +13,10 @@ const API_URL = import.meta.env.VITE_API_URL;
 
 function UserPage() {
   const user = useContext(UserContext);
+
   const { setAppointments } = useContext(AppointmentsContext);
   const appointmentsU = useContext(AppointmentsContext);
+
   const { setAppointment } = useContext(SingleAppointmentContext);
 
   const [show, setShow] = useState(false);
