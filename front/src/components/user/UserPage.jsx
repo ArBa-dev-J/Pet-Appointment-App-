@@ -18,6 +18,7 @@ function UserPage() {
   const appointmentsU = useContext(AppointmentsContext);
 
   const { setAppointment } = useContext(SingleAppointmentContext);
+  const appointment = useContext(SingleAppointmentContext);
 
   const [show, setShow] = useState(false);
   const [error, setError] = useState(null);

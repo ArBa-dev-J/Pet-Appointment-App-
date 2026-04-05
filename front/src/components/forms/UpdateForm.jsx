@@ -27,10 +27,10 @@ function UpdateForm({ appointmentS }) {
             setValue("date", appointmentS.date),
             setValue("description", appointmentS.description)
         );
-    }, [appointment]);
+    }, [appointmentS, setValue]);
 
     const onSubmit = (data) => {
-        // console.log(data);
+        console.log(data);
     }
 
     return (
