@@ -12,7 +12,10 @@ function UpdateForm({ appointmentS }) {
     const [error, setError] = useState(null);
     const user = useContext(UserContext);
 
-    // console.log(appointmentS);
+    const { name, date, time, description } = appointmentS;
+    const dateR =`${date}T${time}`;
+    
+    
     const {
         register,
         handleSubmit,
@@ -23,9 +26,9 @@ function UpdateForm({ appointmentS }) {
 
     useEffect(() => {
         (
-            setValue("name", appointmentS.name),
-            setValue("date", appointmentS.date),
-            setValue("description", appointmentS.description)
+            setValue("name", name),
+            setValue("date", dateR),
+            setValue("description", description)
         );
     }, [appointmentS, setValue]);
 
