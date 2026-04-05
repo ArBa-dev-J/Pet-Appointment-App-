@@ -22,6 +22,7 @@ function LogOut({ notToShow }) {
       });
 
       setUser(null);
+      localStorage.removeItem("user");
       setAppointments([]);
       navigate(`/`);
     } catch (error) {

@@ -38,7 +38,7 @@ function UpdateForm({ appointmentS }) {
             <main>
                 <header className="text-center">
                     <Link to={`/user/${user.user.data.data.userId}/apointments`}>
-                        <h1 className="pt-10">Pet Clinic</h1>
+                        <button onClick={() => localStorage.removeItem("appointment")}><h1 className="pt-10">Pet Clinic</h1></button>
                     </Link>
                 </header>
                 <section>
