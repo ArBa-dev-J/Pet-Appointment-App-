@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import errorHandler from "../../utlis/errorHandler";
 import axios from "axios";
 
+const API_URL = import.meta.env.VITE_API_URL;
 
 
 function UpdateForm({ appointmentS }) {
@@ -12,10 +13,9 @@ function UpdateForm({ appointmentS }) {
     const [error, setError] = useState(null);
     const user = useContext(UserContext);
 
-    const { name, date, time, description } = appointmentS;
-    const dateR =`${date}T${time}`;
-    
-    
+    const { name, date, time, description, pacientId } = appointmentS;
+    const dateR = `${date}T${time}`;
+
     const {
         register,
         handleSubmit,
@@ -32,8 +32,17 @@ function UpdateForm({ appointmentS }) {
         );
     }, [appointmentS, setValue]);
 
-    const onSubmit = (data) => {
-        console.log(data);
+    const onSubmit = async (updatedData) => {
+        try {
+            await axios.patch(`${API_URL}/user/${pacientId}/patients/update`, updatedData, {
+                withCredentials: true,
+            })
+
+            reset();
+            navigate(`/user/${user.user.data.data.userId}/apointments`);
+        } catch (error) {
+            setError(errorHandler(error));
+        }
     }
 
     return (
@@ -85,7 +94,7 @@ function UpdateForm({ appointmentS }) {
                         {errors.date && <span>Description is required</span>}
 
                         <input type="submit" value="Update appointment data" />
-                        {<p>{error}</p>}
+                        {<p className="text-center">{error}</p>}
                     </form>
                 </section>
             </main>
