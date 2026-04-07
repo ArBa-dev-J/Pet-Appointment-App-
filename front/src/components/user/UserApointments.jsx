@@ -7,9 +7,9 @@ import UserAskForDelete from "./UserAskeForDelete";
 
 
 function UserApointments({ appointments, userFetch, toUpdate }) {
-    
-     const user = useContext(UserContext);
-    
+
+    const user = useContext(UserContext);
+
     const [show, setShow] = useState(false);
 
     const toShow = () => setShow(true);
@@ -42,7 +42,7 @@ function UserApointments({ appointments, userFetch, toUpdate }) {
                         {appointments.description}
                     </p>
 
-                    {appointments.isConfirmed ? <p style={{ color: getConfirmColor() }} className="p-2">Is confiormed</p> : <p style={{ color: getConfirmColor() }} className="p-2">Is not confirmed</p>}
+                    {appointments.isConfirmed ? <p style={{ color: getConfirmColor() }} className="p-2">Is confirmed</p> : <p style={{ color: getConfirmColor() }} className="p-2">Is not confirmed</p>}
                 </div>
 
             </div>
