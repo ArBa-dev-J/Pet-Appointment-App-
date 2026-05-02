@@ -32,9 +32,14 @@ function UpdateForm({ appointmentS }) {
         );
     }, [appointmentS, setValue]);
 
+
     const onSubmit = async (updatedData) => {
+        // insert appointment current date to obj
+
+        const updatedDataN = {...updatedData, appDate: dateR}
+
         try {
-            await axios.patch(`${API_URL}/user/${pacientId}/patients/update`, updatedData, {
+            await axios.patch(`${API_URL}/user/${pacientId}/patients/update`, updatedDataN, {
                 withCredentials: true,
             })
 

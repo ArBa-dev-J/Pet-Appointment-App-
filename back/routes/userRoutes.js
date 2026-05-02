@@ -35,6 +35,7 @@ userRoutes
     restrictToOwnUser,
     validatePatient,
     validate,
+    checkDate,
     postNewPatientC,
   );
 // get user patients
