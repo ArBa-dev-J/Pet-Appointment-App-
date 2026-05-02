@@ -13,6 +13,7 @@ import {
   deleteUsersPatientC,
   updatePatientApinfoC
 } from "../controllers/patients.js";
+import checkDate from "../middleware/checkDate.js";
 import validate from "../validator/validate.js";
 import validateNewUser from "../validator/validateNewUser.js";
 import validateNewLogin from "../validator/validateLogin.js";
@@ -59,6 +60,7 @@ userRoutes
   .patch(
     protect,
     allowAccessTo("user"),
+    checkDate,
     updatePatientApinfoC
   )
 
