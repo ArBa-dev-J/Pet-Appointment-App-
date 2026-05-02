@@ -76,6 +76,9 @@ export const updatePatientApInfoM = async (id, newPatientApData, userId) => {
   ...(newPatientApData.date && { isConfirmed: false }),
 };
 
+//delete current appointment date, keep updated date
+const updateDataN = delete updateData.appDate;
+
 const patientList = await sql`
   UPDATE patients
   SET ${sql(updateData)}
